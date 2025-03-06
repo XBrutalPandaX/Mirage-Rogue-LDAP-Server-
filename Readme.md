@@ -1,5 +1,4 @@
 # Mirage - Rogue LDAP Server for Pass-back Attacks  
-
 Mirage is a rogue LDAP server designed to perform LDAP Pass-back attacks against misconfigured network devices, such as printers. By altering a device’s LDAP configuration to point to Mirage, authentication attempts can be intercepted to extract credentials.  
 ---
 
