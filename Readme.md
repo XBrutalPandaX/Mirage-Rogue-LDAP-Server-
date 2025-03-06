@@ -36,3 +36,28 @@ Mirage comes with a Dockerfile that sets up an OpenLDAP server inside a containe
 3. Configures the LDAP server to work without manual setup.
 4. Exposes port 389, which is used for LDAP authentication.
 5. Runs an entrypoint script (entrypoint.sh) to start the LDAP server.
+
+## 🚀 Running with Docker
+
+Mirage comes with a Dockerfile that sets up an OpenLDAP server inside a container.
+
+### What the Dockerfile Does
+- Installs OpenLDAP (slapd) and LDAP utilities.
+- Configures the LDAP server to work without manual setup.
+- Exposes port 389, which is used for LDAP authentication.
+- Runs an entrypoint script (`entrypoint.sh`) to start the LDAP server.
+
+### Build and Run the Container
+
+```bash
+docker build -t mirage .
+docker run -p 389:389 mirage
+```
+## Testing the Server
+To ensure the LDAP server is running and configured properly, you can use the test scripts inside the ldap_tests/ folder.
+### Run LDAP Test Scripts
+Navigate to the ldap_tests/ directory and run the test script:
+```bash
+cd ldap_tests  
+python ldap_test.py
+```
