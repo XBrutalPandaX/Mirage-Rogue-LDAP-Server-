@@ -1,20 +1,27 @@
-from ldap3 import Server, Connection, ALL, NTLM, SIMPLE, AUTO_BIND_NO_TLS
+from ldap3 import Server, Connection, ALL, SIMPLE, SUBTREE
 
+# LDAP server details
+LDAP_SERVER = "ldap://localhost"  # Localhost LDAP server
+BASE_DN = "dc=mike,dc=com"  # Change this to match your LDAP setup
+USER_DN = "cn=Pet ,dc=mike,dc=com"  # LDAP admin user
+PASSWORD = "General"  # Change this to your admin password
 
-LDAP_SERVER = "ldap://localhost"  
-BASE_DN = "dc=example,dc=com"  
-USER_DN = "admin"  
-PASSWORD = "adminpassowrd"  
-
-def authenticate(user_dn, password):
+try:
+    # Connect to the LDAP server
     server = Server(LDAP_SERVER, get_info=ALL)
-    try:
-        conn = Connection(server, user_dn, password, auto_bind=AUTO_BIND_NO_TLS)
-        print(f"✅ Authentication successful for {user_dn}")
-        return True
-    except Exception as e:
-        print(f"❌ Authentication failed for {user_dn}: {e}")
-        return False
+    conn = Connection(server, user=USER_DN, password=PASSWORD, authentication=SIMPLE, auto_bind=True)
 
+    print("[+] Successfully connected to LDAP server!")
 
-authenticate(USER_DN, PASSWORD)
+    # Search for all users
+    conn.search(BASE_DN, "(objectClass=person)", search_scope=SUBTREE, attributes=['cn', 'uid', 'mail'])
+    
+    # Print search results
+    for entry in conn.entries:
+        print(entry)
+
+    # Close connection
+    conn.unbind()
+
+except Exception as e:
+    print("[-] Failed to connect:", str(e))

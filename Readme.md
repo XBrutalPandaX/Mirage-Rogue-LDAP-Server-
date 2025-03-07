@@ -30,10 +30,5 @@ docker run --name mirage --privileged -p 389:389 -d mirage
 To ensure the LDAP server is running and configured properly, you can use the test scripts inside the ldap_tests/ folder.
 ### Run LDAP Test Scripts
 Navigate to the ldap_tests/ directory and run the test script:
-```bash
-cd ldap_tests  
-python ldap_test.py
-```
---
 ## Future Plans
 As part of ongoing improvements to this project, I plan to move away from using the TCPDump proxy and instead fetch credentials directly from LDAP. This will fetch the credentials accuratly from the ldap server than relating something in the middle to do the job. This future update aims to improve accuracy and performance.
