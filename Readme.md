@@ -11,43 +11,21 @@ Mirage is a rogue LDAP server designed to perform LDAP Pass-back attacks against
 ---
 
 ## 🛠️ Setup  
-### Requirements  
-- Docker  
-- Python 3.x  
-- `ldap3` and `scapy` (Install via `pip install ldap3 scapy`)  
-
 ### Installation  
+#### Running with Docker
+Mirage comes with a Dockerfile that sets up an OpenLDAP server inside a container.
 ```bash
-git clone https://github.com/yourusername/mirage.git  
-cd mirage  
-pip install -r requirements.txt  
+docker build -t mirage .
+docker run --name mirage --privileged -p 389:389 -d mirage
 ```
-## Running with Docker
-Mirage comes with a Dockerfile that sets up an OpenLDAP server inside a container.
-
-### What the Dockerfile Does
-1. Uses Debian as the base image.
-2. Installs OpenLDAP (slapd) and LDAP utilities.
-3. Configures the LDAP server to work without manual setup.
-4. Exposes port 389, which is used for LDAP authentication.
-5. Runs an entrypoint script (entrypoint.sh) to start the LDAP server.
-
-## 🚀 Running with Docker
-
-Mirage comes with a Dockerfile that sets up an OpenLDAP server inside a container.
 
 ### What the Dockerfile Does
 - Installs OpenLDAP (slapd) and LDAP utilities.
-- Configures the LDAP server to work without manual setup.
+- Configures the LDAP server to work without manual setup(Uses Plain text authentication and no ecnryption).
 - Exposes port 389, which is used for LDAP authentication.
 - Runs an entrypoint script (`entrypoint.sh`) to start the LDAP server.
+- Runs the TCPdump to fetch credentials and save it to text file.
 
-### Build and Run the Container
-
-```bash
-docker build -t mirage .
-docker run -p 389:389 mirage
-```
 ## Testing the Server
 To ensure the LDAP server is running and configured properly, you can use the test scripts inside the ldap_tests/ folder.
 ### Run LDAP Test Scripts
