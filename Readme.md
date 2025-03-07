@@ -24,9 +24,7 @@ docker run --name mirage --privileged -p 389:389 -d mirage
 - Runs an entrypoint script (`entrypoint.sh`) to start the LDAP server.
 - Runs the TCPdump to fetch credentials and save it to text file.
 
-## Testing the Server
-To ensure the LDAP server is running and configured properly, you can use the test scripts inside the ldap_tests/ folder.
 ### Run LDAP Test Scripts
 Navigate to the ldap_tests/ directory and run the test script:
 ## Future Plans
-As part of ongoing improvements to this project, I plan to move away from using the TCPDump proxy and instead fetch credentials directly from LDAP. This will fetch the credentials accuratly from the ldap server than relating something in the middle to do the job. This future update aims to improve accuracy and performance.
+- [ ] Fetch credentials directly from LDAP  
